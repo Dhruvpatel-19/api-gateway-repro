@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: REGISTER-SERVICE
+          uri: lb://REGISTER-SERVICE
+          predicates:
+            - Path=/registerService/**
+        - id: AUTHENTICATION-SERVICE
+          uri: lb://AUTHENTICATION-SERVICE
+          predicates:
+            - Path=/authenticationService/**
+
+
+  eureka:
+    client:
+      register-with-eureka: true
+      fetch-registry: true
+      service-url:
+        defaultZone : http://localhost:8761/eureka/
+    instance :
+      hostname : localhost
